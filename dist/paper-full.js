@@ -1,5 +1,5 @@
 /*!
- * Paper.js v0.11.5 - The Swiss Army Knife of Vector Graphics Scripting.
+ * Paper.js v0.11.5-crisp - The Swiss Army Knife of Vector Graphics Scripting.
  * http://paperjs.org/
  *
  * Copyright (c) 2011 - 2016, Juerg Lehni & Jonathan Puckey
@@ -9,7 +9,7 @@
  *
  * All rights reserved.
  *
- * Date: Thu Oct 5 16:16:29 2017 +0200
+ * Date: Mon Oct 9 15:12:20 2017 -0700
  *
  ***
  *
@@ -778,7 +778,7 @@ var PaperScope = Base.extend({
 		}
 	},
 
-	version: "0.11.5",
+	version: "0.11.5-crisp",
 
 	getView: function() {
 		var project = this.project;
@@ -2475,16 +2475,19 @@ var Matrix = Base.extend({
 			degrees = 180 / Math.PI,
 			rotate,
 			scale,
+			sign,
 			skew;
 		if (a !== 0 || b !== 0) {
 			var r = sqrt(a * a + b * b);
+			sign = Math.sign(a) || 1;
 			rotate = Math.acos(a / r) * (b > 0 ? 1 : -1);
-			scale = [r, det / r];
+			scale = [sign * r, sign * det / r];
 			skew = [atan2(a * c + b * d, r * r), 0];
 		} else if (c !== 0 || d !== 0) {
 			var s = sqrt(c * c + d * d);
+			sign = Math.sign(d) || 1;
 			rotate = Math.asin(c / s)  * (d > 0 ? 1 : -1);
-			scale = [det / s, s];
+			scale = [sign * det / s, sign * s];
 			skew = [0, atan2(a * c + b * d, s * s)];
 		} else {
 			rotate = 0;
