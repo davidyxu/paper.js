@@ -693,17 +693,20 @@ var Matrix = Base.extend(/** @lends Matrix# */{
             degrees = 180 / Math.PI,
             rotate,
             scale,
+            sign,
             skew;
         if (a !== 0 || b !== 0) {
             var r = sqrt(a * a + b * b);
+            sign = Math.sign(a) || 1;
             rotate = Math.acos(a / r) * (b > 0 ? 1 : -1);
-            scale = [r, det / r];
+            scale = [sign * r, sign * det / r];
             skew = [atan2(a * c + b * d, r * r), 0];
         } else if (c !== 0 || d !== 0) {
             var s = sqrt(c * c + d * d);
+            sign = Math.sign(d) || 1;
             // rotate = Math.PI/2 - (d > 0 ? Math.acos(-c/s) : -Math.acos(c/s));
             rotate = Math.asin(c / s)  * (d > 0 ? 1 : -1);
-            scale = [det / s, s];
+            scale = [sign * det / s, sign * s];
             skew = [0, atan2(a * c + b * d, s * s)];
         } else { // a = b = c = d = 0
             rotate = 0;
