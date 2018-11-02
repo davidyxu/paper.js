@@ -9,7 +9,7 @@
  *
  * All rights reserved.
  *
- * Date: Fri Nov 2 14:35:22 2018 -0700
+ * Date: Fri Nov 2 15:06:54 2018 -0700
  *
  ***
  *
@@ -4489,7 +4489,7 @@ new function() {
 				? parentStrokeMatrix.appended(matrix)
 				: this._canScaleStroke && !this.getStrokeScaling(true)
 					&& viewMatrix,
-			transform = !strokeMatrix || clip;
+			transform = !strokeMatrix;
 		if (direct) {
 			ctx.globalAlpha = opacity;
 			if (nativeBlend)
