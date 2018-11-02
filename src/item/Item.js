@@ -4373,7 +4373,7 @@ new function() { // Injection scope for hit-test functions shared with project
             // If we're drawing into a separate canvas and a clipItem is defined
             // for the current rendering loop, we need to draw the clip item
             // again.
-            clip = !direct && param.clipItem,
+            clip = direct && param.clipItem,
             // If we're drawing with a strokeMatrix, the CTM is reset either way
             // so we don't need to set it, except when we also have to draw a
             // clipItem.
