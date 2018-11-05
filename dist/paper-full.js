@@ -1,5 +1,5 @@
 /*!
- * Paper.js v0.11.8 - The Swiss Army Knife of Vector Graphics Scripting.
+ * Paper.js v0.11.8-dxu/fix-group-clipping - The Swiss Army Knife of Vector Graphics Scripting.
  * http://paperjs.org/
  *
  * Copyright (c) 2011 - 2016, Juerg Lehni & Jonathan Puckey
@@ -9,7 +9,7 @@
  *
  * All rights reserved.
  *
- * Date: Wed Oct 17 17:00:54 2018 +0200
+ * Date: Fri Nov 2 15:06:54 2018 -0700
  *
  ***
  *
@@ -791,7 +791,7 @@ var PaperScope = Base.extend({
 		}
 	},
 
-	version: "0.11.8",
+	version: "0.11.8-dxu/fix-group-clipping",
 
 	getView: function() {
 		var project = this.project;
@@ -4492,8 +4492,7 @@ new function() {
 				? parentStrokeMatrix.appended(matrix)
 				: this._canScaleStroke && !this.getStrokeScaling(true)
 					&& viewMatrix,
-			clip = !direct && param.clipItem,
-			transform = !strokeMatrix || clip;
+			transform = !strokeMatrix;
 		if (direct) {
 			ctx.globalAlpha = opacity;
 			if (nativeBlend)
@@ -4503,9 +4502,6 @@ new function() {
 		}
 		if (transform) {
 			(direct ? matrix : viewMatrix).applyToContext(ctx);
-		}
-		if (clip) {
-			param.clipItem.draw(ctx, param.extend({ clip: true }));
 		}
 		if (strokeMatrix) {
 			ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
